@@ -73,7 +73,7 @@ class IndexReader:
         self,
         file_path: str | Path,
         index_record_setter: IndexSetterFunc = lambda record: {},
-        source_record_loader: IndexLoaderFunc = lambda line: json.loads(line),
+        source_record_loader: IndexLoaderFunc = lambda line: json.loads(line.strip()),
         mkdir_mode: MkdirMode | None = "interactive",
     ):
         """Initializes an `IndexReader` instance.
