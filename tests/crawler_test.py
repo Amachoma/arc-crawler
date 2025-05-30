@@ -49,7 +49,7 @@ class TestCrawler:
         utils = TestingUtils(monkeypatch, tmp_path)
         utils.mock_input("y")
 
-        crawler = Crawler(mode="async", out_file_path=tmp_path)
+        crawler = Crawler(mode="async", out_file_path=tmp_path, log_level="debug")
         crawler.get([], out_file_name=utils.empty_file_name)
         assert utils.empty_file_path.exists()
 
@@ -64,7 +64,7 @@ class TestCrawler:
         )
         elapsed_top_line = elapsed_bottom_line * 1.1
 
-        crawler = Crawler(mode="async", out_file_path=tmp_path)
+        crawler = Crawler(mode="async", out_file_path=tmp_path, log_level="debug")
 
         request_start_time = time()
         crawler.get(requests.urls, out_file_name=utils.filled_file_name, request_delay=utils.request_delay)
@@ -78,7 +78,7 @@ class TestCrawler:
         utils = TestingUtils(monkeypatch, tmp_path)
         utils.mock_input("y")
 
-        crawler = Crawler(mode="sync", out_file_path=tmp_path)
+        crawler = Crawler(mode="sync", out_file_path=tmp_path, log_level="debug")
         crawler.get([], out_file_name=utils.empty_file_name)
 
         assert utils.empty_file_path.exists()
@@ -94,7 +94,7 @@ class TestCrawler:
         )
         elapsed_top_line = elapsed_bottom_line * 1.15
 
-        crawler = Crawler(mode="sync", out_file_path=tmp_path)
+        crawler = Crawler(mode="sync", out_file_path=tmp_path, log_level="debug")
 
         request_start_time = time()
         crawler.get(requests.urls, out_file_name=utils.filled_file_name, request_delay=utils.request_delay)
@@ -111,7 +111,7 @@ class TestCrawler:
         utils.mock_input("y")
 
         # Getting empty array
-        crawler = Crawler(out_file_path=tmp_path)
+        crawler = Crawler(out_file_path=tmp_path, log_level="debug")
         reader = crawler.get([])
         file_name = reader.path.name
 
@@ -137,7 +137,7 @@ class TestCrawler:
         utils.mock_input("y")
         url_list = requests.urls[0 : len(requests.urls) // 2]
 
-        crawler = Crawler(out_file_path=tmp_path)
+        crawler = Crawler(out_file_path=tmp_path, log_level="debug")
         crawler.get(url_list, out_file_name=utils.filled_file_name)
 
         reader = IndexReader(utils.filled_file_path)
@@ -153,7 +153,7 @@ class TestCrawler:
         random.shuffle(random_urls)
         random_urls = random_urls[0 : random.randint(1, len(random_urls))]
 
-        crawler = Crawler(out_file_path=tmp_path)
+        crawler = Crawler(out_file_path=tmp_path, log_level="debug")
         crawler.get(random_urls, out_file_name=utils.filled_file_name)
 
         requested_urls = []
@@ -174,7 +174,7 @@ class TestCrawler:
         requests = MockNetwork(utils.requests_config, monkeypatch)
         url_list = requests.urls[0 : len(requests.urls) // 2]
 
-        crawler = Crawler(out_file_path=tmp_path)
+        crawler = Crawler(out_file_path=tmp_path, log_level="debug")
 
         def handle_response(**kwargs: Unpack[ResponseHandlerKwargs]):
             res = dict(kwargs["response"])
@@ -192,7 +192,7 @@ class TestCrawler:
         requests = MockNetwork(utils.requests_config, monkeypatch)
         url_list = requests.urls[0 : len(requests.urls) // 2]
 
-        crawler = Crawler(out_file_path=tmp_path)
+        crawler = Crawler(out_file_path=tmp_path, log_level="debug")
 
         def process_index_record(_):
             return {utils.custom_field: utils.custom_field_value}
@@ -208,7 +208,7 @@ class TestCrawler:
         requests = MockNetwork(utils.mixed_requests, monkeypatch)
         successful_responses = list(filter(lambda rec: rec.get("response").get("status") == 200, utils.mixed_requests))
 
-        crawler = Crawler(out_file_path=tmp_path)
+        crawler = Crawler(out_file_path=tmp_path, log_level="debug")
 
         def process_response(**kw: Unpack[ResponseHandlerKwargs]):
             response = kw.get("response")
@@ -238,7 +238,7 @@ class TestCrawler:
             await fetcher.get([url_str], on_response=append_response, session=session)
             return response
 
-        crawler = Crawler(out_file_path=tmp_path, mode="sync")
+        crawler = Crawler(out_file_path=tmp_path, mode="sync", log_level="debug")
         crawler.get(
             requests.urls, out_file_name=utils.filled_file_name, response_processor=follow_up_request, request_delay=0
         )

@@ -196,9 +196,11 @@ class IndexReader:
         self._next_start_byte += len(payload_str.encode("utf-8")) + 1
 
     def __read_from_byte(self, byte_index):
+        logger.debug(f"Reading binary:")
         with open(self._file_path, "rb") as temp_binary:
             temp_binary.seek(byte_index)
             t_line = temp_binary.readline()
+            logger.debug(f"{t_line}")
             return self._source_record_getter(t_line.decode())
 
     def get(self, filtering: int | FilterFunc) -> Dict[str, Any] | List[Dict[str, Any]]:
