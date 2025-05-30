@@ -1,3 +1,4 @@
+from os import linesep
 from typing import Any, Dict, List
 
 import json
@@ -155,7 +156,7 @@ class IndexReader:
             )
 
         self._index_data = open_lines(self._index_file_path)
-        self._next_start_byte = 0 if len(self._index_data) == 0 else self._index_data[-1].get("start_byte") + 1
+        self._next_start_byte = 0 if len(self._index_data) == 0 else self._index_data[-1].get("start_byte")
         self._check_integrity()
 
     # Integrity check to confirm if .index record is matching .jsonl record
@@ -192,8 +193,8 @@ class IndexReader:
         self._index_data.append(new_index_record)
         write_line(self._index_file_path, new_index_record)
 
-        payload_str = json.dumps(obj, ensure_ascii=False) + "\n"
-        self._next_start_byte += len(payload_str.encode("utf-8")) + 1
+        payload_str = json.dumps(obj, ensure_ascii=False) + linesep
+        self._next_start_byte += len(payload_str.encode("utf-8"))
 
     def __read_from_byte(self, byte_index):
         logger.debug(f"Reading binary:")
