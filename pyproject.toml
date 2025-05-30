@@ -47,8 +47,8 @@ poetry_command = "do"
 test = "pytest"
 format = "ruff format"
 build-clean = "poetry build --clean"
-pub-test = "poetry publish -r testpypi"
-
+pub-testpypi = "poetry publish -r testpypi"
+pub-pypi = "poetry publish"
 
 [tool.poetry.requires-plugins]
 poethepoet = { version = "~0.34.0", extras = ["poetry_plugin"] }

@@ -2,7 +2,9 @@
 
 🌐 [English](https://github.com/Amachoma/arc-crawler/blob/master/README.md) | [日本語](https://github.com/Amachoma/arc-crawler/blob/master/README.jp.md)
 
-![img](https://raw.githubusercontent.com/Amachoma/arc-crawler/master/docs/arc-crawler-logo.svg)
+<p align="center">
+  <img width="256" src="https://raw.githubusercontent.com/Amachoma/arc-crawler/master/docs/arc-crawler-logo.svg" />
+</p>
 
 `arc-crawler` is a flexible Python module designed to simplify complex web scraping tasks.
 It focuses on efficient, resumable data acquisition, structured output management,

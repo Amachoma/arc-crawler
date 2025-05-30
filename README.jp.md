@@ -2,7 +2,9 @@
 
 🌐 [English](https://github.com/Amachoma/arc-crawler/blob/master/README.md) | [日本語](https://github.com/Amachoma/arc-crawler/blob/master/README.jp.md)
 
-![img](https://raw.githubusercontent.com/Amachoma/arc-crawler/master/docs/arc-crawler-logo.svg)
+<p align="center">
+  <img width="256" src="https://raw.githubusercontent.com/Amachoma/arc-crawler/master/docs/arc-crawler-logo.svg" />
+</p>
 
 `arc-crawler` は、複雑なウェブスクレイピングタスクを簡素化するために設計された柔軟なPythonモジュールです。
 効率的で再開可能なデータ収集、構造化された出力管理、カスタマイズ可能なデータ処理に焦点を当てています。
