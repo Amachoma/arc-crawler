@@ -106,6 +106,7 @@ ipython_config.py
 #   commonly ignored for libraries.
 #   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
 #poetry.lock
+.poetry
 
 # pdm
 #   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
@@ -172,3 +173,6 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Examples output
+/examples/output

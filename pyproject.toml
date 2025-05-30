@@ -1,0 +1,61 @@
+[project]
+name = "arc-crawler"
+version = "0.1.0"
+description = "Configurable crawler for web-scraping"
+authors = [
+    { name = "Amachoma", email = "as.derbin99@gmail.com" }
+]
+licence = "MIT"
+readme = "README.md"
+repository = "https://github.com/Amachoma/arc-crawler"
+keywords = ["scrape", "crawl", "test"]
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Programming Language :: Python",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English"
+]
+include = [
+    "LICENSE",
+]
+exclude = [
+    "examples"
+]
+dependencies = [
+    "aiohttp (>=3.11.10,<4.0.0)",
+    "bs4 (>=0.0.2,<0.0.3)",
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+
+[tool.poe]
+poetry_command = "do"
+
+[tool.poe.tasks]
+test = "pytest"
+format = "ruff format"
+build-clean = "poetry build --clean"
+pub-test = "poetry publish -r testpypi"
+
+
+[tool.poetry.requires-plugins]
+poethepoet = { version = "~0.34.0", extras = ["poetry_plugin"] }
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.11.10"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.3.5"
+pytest-cov = "^6.1.1"
