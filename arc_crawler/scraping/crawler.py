@@ -341,7 +341,7 @@ class Crawler:
 
         async def handle_response_received(**kw: Unpack[ResponseHandlerKwargs]):
             response, session = kw["response"], kw["session"]
-            response["url"] = unquote(str(response["url"]))
+            response_url = unquote(str(response["url"]))
 
             if inspect.iscoroutinefunction(response_processor):
                 response_obj = await response_processor(response=response, session=session)
@@ -349,9 +349,9 @@ class Crawler:
                 response_obj = response_processor(response=response, session=session)
 
             if response_obj is not None:
-                self.reader.write(response_obj)
+                self.reader.write({**response_obj, "url": response_url})
 
-            timer.measure(response["url"])
+            timer.measure(response_url)
             timer.print_status(with_progressbar=True, with_time_remaining=True)
 
         asyncio.run(

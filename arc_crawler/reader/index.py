@@ -155,7 +155,7 @@ class IndexReader:
             )
 
         self._index_data = open_lines(self._index_file_path)
-        self._next_start_byte = 0 if len(self._index_data) == 0 else self._index_data[-1].get("start_byte") + 2
+        self._next_start_byte = 0 if len(self._index_data) == 0 else self._index_data[-1].get("start_byte") + 1
         self._check_integrity()
 
     # Integrity check to confirm if .index record is matching .jsonl record
