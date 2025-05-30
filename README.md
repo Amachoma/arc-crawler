@@ -67,12 +67,12 @@ if __name__ == "__main__":
 ### 📚 More Examples & Advanced Usage
 
 For more detailed examples demonstrating advanced features like custom response/request processors,
-metadata indexing, and handling json content, please refer to the examples/basic.py
-and examples/advanced.py file within the repository.
+metadata indexing, and handling json content, please refer to the [basic.py](https://github.com/Amachoma/arc-crawler/blob/master/examples/basic.py)
+and [advanced.py](https://github.com/Amachoma/arc-crawler/blob/master/examples/advanced.py) file within the repository.
 
 Additionally, for comprehensive API documentation, including all available parameters, return types,
 and internal workings, explore the detailed docstrings within the arc-crawler module's source code
-(e.g., use help(Crawler) or help(Crawler.get) in your Python interpreter or access docs via IDE Tools).
+(e.g., use `help(Crawler)` or `help(Crawler.get)` in your Python interpreter or access docs via IDE Tools).
 
 ## 💡 Best Practice: Separate Scraping from Parsing
 
