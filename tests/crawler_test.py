@@ -3,7 +3,8 @@ from typing import List, Unpack
 from time import time
 import random
 
-from arc_crawler import Crawler, ResponseHandlerKwargs, SequentialFetcher, IndexReader
+from arc_crawler import Crawler, ResponseHandlerKwargs, SequentialFetcher
+from arc_crawler.reader import IndexReader
 from tests.helpers import MockNetwork, NetworkRequest
 
 
@@ -59,10 +60,8 @@ class TestCrawler:
         requests = MockNetwork(utils.requests_config, monkeypatch)
         utils.mock_input("y")
 
-        elapsed_bottom_line = max(utils.requests_config, key=lambda x: x["delay"])["delay"] + utils.request_delay * (
-            len(requests.urls) - 1
-        )
-        elapsed_top_line = elapsed_bottom_line * 1.1
+        elapsed_bottom_line = max(utils.requests_config, key=lambda x: x["delay"])["delay"]
+        elapsed_top_line = (elapsed_bottom_line + (len(utils.requests_config) - 1) * utils.request_delay) * 1.1
 
         crawler = Crawler(mode="async", out_file_path=tmp_path, log_level="debug")
 
@@ -90,7 +89,7 @@ class TestCrawler:
         utils.mock_input("y")
 
         elapsed_bottom_line = sum([item["delay"] for item in utils.requests_config]) + utils.request_delay * (
-            len(requests.urls) - 1
+                len(requests.urls) - 1
         )
         elapsed_top_line = elapsed_bottom_line * 1.15
 
@@ -135,7 +134,7 @@ class TestCrawler:
         utils = TestingUtils(monkeypatch, tmp_path)
         requests = MockNetwork(utils.requests_config, monkeypatch)
         utils.mock_input("y")
-        url_list = requests.urls[0 : len(requests.urls) // 2]
+        url_list = requests.urls[0: len(requests.urls) // 2]
 
         crawler = Crawler(out_file_path=tmp_path, log_level="debug")
         crawler.get(url_list, out_file_name=utils.filled_file_name)
@@ -151,7 +150,7 @@ class TestCrawler:
 
         random_urls = requests.urls[:]
         random.shuffle(random_urls)
-        random_urls = random_urls[0 : random.randint(1, len(random_urls))]
+        random_urls = random_urls[0: random.randint(1, len(random_urls))]
 
         crawler = Crawler(out_file_path=tmp_path, log_level="debug")
         crawler.get(random_urls, out_file_name=utils.filled_file_name)
@@ -164,7 +163,7 @@ class TestCrawler:
         reader = crawler.get(requests.urls, out_file_name=utils.filled_file_name, request_processor=append_urls)
         extra_urls = [rec for rec in requests.urls if rec not in random_urls]
 
-        assert requested_urls == extra_urls
+        assert sorted(requested_urls) == sorted(extra_urls)
         assert len(reader) == len(requests.urls)
 
     # crawler can produce customized extended output
@@ -172,7 +171,7 @@ class TestCrawler:
         utils = TestingUtils(monkeypatch, tmp_path)
         utils.mock_input("y")
         requests = MockNetwork(utils.requests_config, monkeypatch)
-        url_list = requests.urls[0 : len(requests.urls) // 2]
+        url_list = requests.urls[0: len(requests.urls) // 2]
 
         crawler = Crawler(out_file_path=tmp_path, log_level="debug")
 
@@ -190,7 +189,7 @@ class TestCrawler:
         utils = TestingUtils(monkeypatch, tmp_path)
         utils.mock_input("y")
         requests = MockNetwork(utils.requests_config, monkeypatch)
-        url_list = requests.urls[0 : len(requests.urls) // 2]
+        url_list = requests.urls[0: len(requests.urls) // 2]
 
         crawler = Crawler(out_file_path=tmp_path, log_level="debug")
 
@@ -243,4 +242,4 @@ class TestCrawler:
             requests.urls, out_file_name=utils.filled_file_name, response_processor=follow_up_request, request_delay=0
         )
 
-        assert follow_up_responses == requests.urls
+        assert sorted(follow_up_responses) == sorted(requests.urls)

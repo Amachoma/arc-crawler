@@ -43,17 +43,13 @@ class OnResponseCallback(Protocol):
 
 class OnRequestCallback(Protocol):
     @overload
-    async def __call__(self, url: str) -> None:
-        pass
+    async def __call__(self, url: str) -> None: ...
 
-    def __call__(self, url: str) -> None:
-        pass
+    def __call__(self, url: str) -> None: ...
 
 
 class ResponseProcessor(Protocol):
     @overload
-    async def __call__(self, **kwargs: Unpack[ResponseHandlerKwargs]) -> JsonSerializable:
-        pass
+    async def __call__(self, **kwargs: Unpack[ResponseHandlerKwargs]) -> JsonSerializable: ...
 
-    def __call__(self, **kwargs: Unpack[ResponseHandlerKwargs]) -> JsonSerializable:
-        pass
+    def __call__(self, **kwargs: Unpack[ResponseHandlerKwargs]) -> JsonSerializable: ...

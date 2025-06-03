@@ -58,7 +58,7 @@ class IndexReader:
                         * **index** (Path): Full path to the metadata index file.
 
         Examples:
-                >>> from arc_crawler import IndexReader
+                >>> from arc_crawler.reader import IndexReader
                 >>> IndexReader.touch("./output/filename")
                 {'parent': Path('output'), 'source': Path('output/filename.jsonl'), 'index': Path('output/filename.index')}
         """
@@ -108,7 +108,7 @@ class IndexReader:
         Examples:
                 1) To initialize with minimal arguments:
 
-                >>> from arc_crawler import IndexReader
+                >>> from arc_crawler.reader import IndexReader
                 >>> reader = IndexReader("./output/filename")
 
                 2) To extend metadata with custom fields for easier search:
@@ -228,21 +228,21 @@ class IndexReader:
         Examples:
                 1) To get the second record by index:
 
-                >>> from arc_crawler import IndexReader
+                >>> from arc_crawler.reader import IndexReader
                 >>> reader = IndexReader("./output/filename")
                 >>> reader.get(1)
                 {'title': 'Inception', 'year': 2010, 'rating': 8.8}
 
                 2) To get one record based on a filter function:
 
-                >>> from arc_crawler import IndexReader
+                >>> from arc_crawler.reader import IndexReader
                 >>> reader = IndexReader("./output/filename")
                 >>> reader.get(lambda rec: rec.get("title") == "Inception")
                 {'title': 'Inception', 'year': 2010, 'rating': 8.8}
 
                 3) To get multiple records matching a broad filter:
 
-                >>> from arc_crawler import IndexReader
+                >>> from arc_crawler.reader import IndexReader
                 >>> reader = IndexReader("./output/filename")
                 >>> reader.get(lambda rec: rec.get("year") == 2010)
                 [
@@ -295,7 +295,7 @@ class IndexReader:
         Example:
                 To write a dictionary to the file:
 
-                >>> from arc_crawler import IndexReader
+                >>> from arc_crawler.reader import IndexReader
                 >>> reader = IndexReader("./output/filename", mkdir_mode="forced")
                 >>> reader.write({"foo": "bar", "bar": "baz"})
         """
