@@ -1,6 +1,6 @@
 [project]
 name = "arc-crawler"
-version = "0.1.0"
+version = "0.1.1"
 description = "Configurable crawler for web-scraping"
 authors = [
     { name = "Amachoma", email = "as.derbin99@gmail.com" }
