@@ -223,9 +223,8 @@ class Crawler:
             self.out_source, index_record_setter=self.index_record_setter, mkdir_mode=self.mkdir_mode
         )
         finished_urls = [index_rec["url"] for index_rec in self.reader.index_data]
-        urls_to_fetch = [url for url in urls if url not in finished_urls]
 
-        return urls_to_fetch
+        return list(set(urls) - set(finished_urls))
 
     def get(
         self,

@@ -1,7 +1,7 @@
 import pytest
 from pathlib import Path
 
-from arc_crawler import IndexReader
+from arc_crawler.reader import IndexReader
 from arc_crawler.utils import write_line
 
 

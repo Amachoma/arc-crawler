@@ -93,3 +93,14 @@ This approach offers significant advantages:
 
 In essence, with arc-crawler, focus on saving the raw source data. Parsing is a distinct,
 subsequent step best performed after fetching.
+
+## Changelog
+
+### 0.1.1
+Minor performance optimizations and structural changes
+
+* Performance improvements for cases when comparing large list of target URLs against those already fetched.
+* Moved `IndexReader` related imports to `arc_crawler.reader` for clarity.
+
+### 0.1.0
+Initial release
